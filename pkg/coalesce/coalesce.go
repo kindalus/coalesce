@@ -12,7 +12,9 @@ type EmptyConstraint interface {
 
 func Empty[T EmptyConstraint](values ...T) T {
 
-	return Coalesce(nil, values...)
+	isEmpty := func(v T) bool { return len(v) == 0 }
+
+	return CoalesceFn(isEmpty, values...)
 }
 
 func Coalesce[T any](target interface{}, values ...T) T {
