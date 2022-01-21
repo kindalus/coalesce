@@ -1,9 +1,9 @@
 package coalesce
 
 func Nil[T any](values ...T) T {
-	isNil := func(v T) bool { return interface{}(v) == nil }
+	isNil := func(v T) bool { return interface{}(v) != nil }
 
-	return CoalesceFn(isNil, values...)
+	return Func(isNil, values...)
 }
 
 type EmptyConstraint interface {
@@ -12,25 +12,25 @@ type EmptyConstraint interface {
 
 func Empty[T EmptyConstraint](values ...T) T {
 
-	isEmpty := func(v T) bool { return len(v) == 0 }
+	isEmpty := func(v T) bool { return len(v) > 0 }
 
-	return CoalesceFn(isEmpty, values...)
+	return Func(isEmpty, values...)
 }
 
-func Coalesce[T any](target interface{}, values ...T) T {
+func Equal[T any](target T, values ...T) T {
 
 	isEqual := func(value T) bool {
-		return interface{}(value) == target
+		return interface{}(value) == interface{}(target)
 	}
 
-	return CoalesceFn(isEqual, values...)
+	return Func(isEqual, values...)
 }
 
-func CoalesceFn[T any](testFn func(T) bool, values ...T) T {
+func Func[T any](test func(T) bool, values ...T) T {
 
 	for _, v := range values {
 
-		if !testFn(v) {
+		if test(v) {
 			return v
 		}
 
