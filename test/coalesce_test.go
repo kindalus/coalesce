@@ -25,7 +25,7 @@ func TestEmptyWithStrings(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		result := coalesce.Empty(test.Args...)
+		result := coalesce.NotEmpty(test.Args...)
 
 		assert.Equal(t, test.Result, result)
 	}

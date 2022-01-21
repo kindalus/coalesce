@@ -1,20 +1,20 @@
 package coalesce
 
-func Nil[T any](values ...T) T {
-	isNil := func(v T) bool { return interface{}(v) != nil }
+func NotNil[T any](values ...T) T {
+	isNotNil := func(v T) bool { return interface{}(v) != nil }
 
-	return Func(isNil, values...)
+	return Func(isNotNil, values...)
 }
 
 type EmptyConstraint interface {
 	[]interface{} | ~string
 }
 
-func Empty[T EmptyConstraint](values ...T) T {
+func NotEmpty[T EmptyConstraint](values ...T) T {
 
-	isEmpty := func(v T) bool { return len(v) > 0 }
+	isNotEmpty := func(v T) bool { return len(v) > 0 }
 
-	return Func(isEmpty, values...)
+	return Func(isNotEmpty, values...)
 }
 
 func Equal[T any](target T, values ...T) T {
