@@ -3,7 +3,7 @@ package test
 import (
 	"testing"
 
-	"github.com/kindalus/coalesce/pkg/coalesce"
+	"github.com/kindalus/gofunc/pkg/coalesce"
 	"github.com/stretchr/testify/assert"
 )
 

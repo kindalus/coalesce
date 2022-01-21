@@ -1,4 +1,4 @@
-module github.com/kindalus/coalesce
+module github.com/kindalus/gofunc
 
 go 1.18
 
