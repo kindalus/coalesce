@@ -15,6 +15,14 @@ func TestCreateCollectionFromLiterals(t *testing.T) {
 	assert.Equal(t, 3, c[2])
 }
 
+func TestCreateEmptyCollection(t *testing.T) {
+	c := collections.From[int]()
+	e := collections.Empty[string]()
+
+	assert.Equal(t, 0, len(c))
+	assert.Equal(t, 0, len(e))
+}
+
 func TestCreateCollectionFromSlice(t *testing.T) {
 	s := []int{'a', 'b', 'c', 'd', 'e'}
 	c := collections.From(s...)
