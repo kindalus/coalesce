@@ -21,3 +21,7 @@ func (c Collection[T]) Filter(f func(r T) bool) Collection[T] {
 func (c Collection[T]) Any(f func(r T) bool) bool {
 	return Any(c, f)
 }
+
+func (c Collection[T]) Sort(greater func(a, b T) bool) Collection[T] {
+	return Sort(c, greater)
+}

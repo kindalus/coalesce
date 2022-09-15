@@ -56,3 +56,16 @@ func TestCollectionAny(t *testing.T) {
 		return r == 0
 	}))
 }
+
+func TestCollectionSort(t *testing.T) {
+
+	c := collections.From(1, 2, 3, 4, 5)
+
+	c = c.Sort(func(a, b int) bool {
+		return a < b
+	})
+
+	assert.Equal(t, 5, len(c))
+	assert.Equal(t, 5, c[0])
+	assert.Equal(t, 4, c[1])
+}
